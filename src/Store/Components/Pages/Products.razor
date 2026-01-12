@@ -2,24 +2,47 @@
 @using DataEntities
 @using Store.Services
 @inject IConfiguration Configuration
+@inject ProductService ProductService
 @rendermode InteractiveServer
 @attribute [StreamRendering(true)]
 
 <PageTitle>Products</PageTitle>
 
-<h1>Products</h1>
-
-<p>Here are some of our amazing outdoor products that you can purchase.</p>
+<div class="products-header">
+    <h1>Our Products</h1>
+    <p>Discover premium outdoor gear for your next adventure</p>
+</div>
 
 @if (products == null)
 {
-    <p><em>Loading...</em></p>
+    <div class="loading-container">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
 }
 else
 {
-    <!--Implement Products table here-->
-    <p>Under construction...</p>
-
+    <div class="products-grid">
+        @foreach (var product in products)
+        {
+            <div class="product-card">
+                <div class="product-image">
+                    @if (!string.IsNullOrEmpty(product.ImageUrl))
+                    {
+                        <img src="@($"{imagePrefix}{product.ImageUrl}")" alt="@product.Name" />
+                    }
+                    <div class="product-overlay">
+                        <button class="btn-view">View Details</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h5 class="product-name">@product.Name</h5>
+                    <p class="product-price">$@product.Price.ToString("N2")</p>
+                </div>
+            </div>
+        }
+    </div>
 }
 
 @code {
@@ -28,10 +51,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(500);
         imagePrefix = Configuration["ImagePrefix"]!;
-        products = [];
+        products = await ProductService.GetProducts();
     }
-
 }
