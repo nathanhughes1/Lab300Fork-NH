@@ -1,12 +1,13 @@
 .card {
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     transition: transform 0.2s, box-shadow 0.2s;
+    background-color: var(--card-bg);
 }
 
 .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-lg);
 }
 
 .card-img-top {
@@ -19,18 +20,19 @@
 .card-body {
     display: flex;
     flex-direction: column;
+    background-color: var(--card-bg);
 }
 
 .card-title {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .card-text {
     margin-bottom: 0.5rem;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .card-text strong {
@@ -97,11 +99,16 @@
     z-index: -1;
 }
 
+[data-theme="dark"] .products-grid::before {
+    background: linear-gradient(to bottom, rgba(26, 26, 46, 0.4) 0%, rgba(22, 33, 62, 0.3) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%2392400e" opacity="0.03" d="M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,133.3C672,117,768,107,864,122.7C960,139,1056,181,1152,197.3C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/></svg>');
+}
+
 .product-card {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-sm);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     border: 1px solid rgba(217, 119, 6, 0.1);
@@ -155,7 +162,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .product-card:hover .product-image img {
@@ -205,13 +212,13 @@
 
 .product-info {
     padding: 1.5rem;
-    background: #fff;
+    background: var(--card-bg);
 }
 
 .product-name {
     font-size: 1.125rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--text-primary);
     margin: 0 0 0.75rem 0;
     line-height: 1.4;
     letter-spacing: -0.2px;
